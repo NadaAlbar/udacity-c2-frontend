@@ -13,6 +13,8 @@ import { MenubarComponent } from './menubar/menubar.component';
 import { AuthModule } from './auth/auth.module';
 import { ApiService } from './api/api.service';
 
+
+//our app module will take the features like auth and feed (under src folder) and importing them in pur main application
 @NgModule({
   declarations: [
     AppComponent,

@@ -4,13 +4,13 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { FeedItem } from '../feed/models/feed-item.model';
 import { catchError, tap, map } from 'rxjs/operators';
-
+//the api service is that is giving us the overhead to make that request.
 const API_HOST = environment.apiHost;
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class ApiService { /* we're sending HTTP options for application JSON for application payloads with every request */
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
@@ -23,14 +23,16 @@ export class ApiService {
   handleError(error: Error) {
     alert(error.message);
   }
-
+//saving tokens
   setAuthToken(token) {
-    this.httpOptions.headers = this.httpOptions.headers.append('Authorization', `jwt ${token}`);
+    this.httpOptions.headers = this.httpOptions.headers.append('Authorization', `jwt ${token}`);// If we have a token we appen it in the header of the request
     this.token = token;
   }
 
+  //we're abstracing our get and post method --> !
   get(endpoint): Promise<any> {
-    const url = `${API_HOST}${endpoint}`;
+    const url = `${API_HOST}${endpoint}`;//we're adding endpoint as our method signature
+    //then we're performing an HTTP request with the Angular service to get that request
     const req = this.http.get(url, this.httpOptions).pipe(map(this.extractData));
 
     return req

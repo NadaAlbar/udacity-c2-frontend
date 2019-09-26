@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   appName: 'Udagram',
-  apiHost: 'http://localhost:8080/api/v0'
+  apiHost: 'http://localhost:8080/api/v0' /* we can change this to point at our ElasticBean stalk endpoint that was provisioned for us
+  and then when we build this code, it'll point to our remote server instead of our local server*/ 
 };
 
 /*

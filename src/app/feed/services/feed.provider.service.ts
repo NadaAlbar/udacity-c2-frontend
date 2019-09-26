@@ -15,13 +15,13 @@ export class FeedProviderService {
   async getFeed(): Promise<BehaviorSubject<FeedItem[]>> {
     const req = await this.api.get('/feed');
     const items = <FeedItem[]> req.rows;
-    this.currentFeed$.next(items);
+    this.currentFeed$.next(items);//we're nofitying our frontend that there is a new data in our feed and we're giving it that new data.
     return Promise.resolve(this.currentFeed$);
   }
 
   async uploadFeedItem(caption: string, file: File): Promise<any> {
     const res = await this.api.upload('/feed', file, {caption: caption, url: file.name});
-    const feed = [res, ...this.currentFeed$.value];
+    const feed = [res, /*... */this.currentFeed$.value];
     this.currentFeed$.next(feed);
     return res;
   }
